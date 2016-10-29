@@ -71,7 +71,6 @@ class Client
 
             $data = $data->getData()[0];
 
-            $balance->setSuccess(true);
             $balance->setCurrency($data->Currency);
             $balance->setAddress($data->CryptoAddress);
             $balance->setTotal($data->Balance);
@@ -104,7 +103,6 @@ class Client
             foreach ($data->getData() as $balanceInfo) {
                 $balance = new Balance();
 
-                $balance->setSuccess(true);
                 $balance->setCurrency($balanceInfo->Currency);
                 $balance->setAddress($balanceInfo->CryptoAddress);
                 $balance->setTotal($balanceInfo->Balance);

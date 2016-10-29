@@ -7,9 +7,6 @@ class OpenOrder
     /** @var bool */
     private $cancelInitiated = false;
 
-    /** @var */
-    private $closed;
-
     /** @var float */
     private $commissionPaid = 0.0;
 
@@ -69,22 +66,6 @@ class OpenOrder
     public function setCancelInitiated(bool $cancelInitiated)
     {
         $this->cancelInitiated = $cancelInitiated;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getClosed()
-    {
-        return $this->closed;
-    }
-
-    /**
-     * @param mixed $closed
-     */
-    public function setClosed($closed)
-    {
-        $this->closed = $closed;
     }
 
     /**
@@ -154,7 +135,7 @@ class OpenOrder
     /**
      * @return boolean
      */
-    public function isIsConditional() : bool
+    public function isConditional() : bool
     {
         return $this->isConditional;
     }
