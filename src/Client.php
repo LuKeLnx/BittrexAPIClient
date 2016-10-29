@@ -12,6 +12,7 @@ use ErikBooij\Bittrex\Model\OpenOrder;
 use ErikBooij\Bittrex\Model\Order;
 use ErikBooij\Bittrex\Model\Ticker;
 use ErikBooij\Bittrex\Model\Transaction;
+use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\ClientInterface as HttpClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -41,10 +42,14 @@ class Client
      * @param string $apiSecret
      * @param HttpClientInterface $httpClient
      */
-    public function __construct(string $apiKey, string $apiSecret, HttpClientInterface $httpClient)
+    public function __construct(string $apiKey, string $apiSecret, HttpClientInterface $httpClient = null)
     {
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
+
+        if (is_null($httpClient)) {
+            $httpClient = new HttpClient();
+        }
         $this->httpClient = $httpClient;
     }
 
