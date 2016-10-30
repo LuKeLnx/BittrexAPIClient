@@ -1,12 +1,13 @@
 {
   "name": "erikbooij/bittrex-client",
   "description": "A flexible client for the Bittrex trading API.",
-    "require": {
-        "guzzlehttp/guzzle": "^6.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "ErikBooij\\Bittrex\\": "./src"
-        }
+  "license": "MIT",
+  "require": {
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "ErikBooij\\Bittrex\\": "./src"
     }
+  }
 }
