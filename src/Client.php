@@ -369,23 +369,14 @@ class Client
             foreach ($data->getData() as $openOrderInfo) {
                 $openOrder = new OpenOrder();
 
-                $openOrder->setCancelInitiated($openOrderInfo->CancelInitiated);
-                $openOrder->setClosed(new \DateTime($openOrderInfo->Closed));
-                $openOrder->setCommissionPaid($openOrderInfo->CommissionPaid);
-                $openOrder->setCondition($openOrderInfo->Condition);
-                $openOrder->setConditionTarget($openOrderInfo->ConditionTarget);
-                $openOrder->setImmediateOrCancel($openOrderInfo->ImmediateOrCancel);
-                $openOrder->setIsConditional($openOrderInfo->IsConditional);
                 $openOrder->setLimit($openOrderInfo->Limit);
                 $openOrder->setMarket($openOrderInfo->Exchange);
                 $openOrder->setOpened(new \DateTime($openOrderInfo->Opened));
                 $openOrder->setOrderType($openOrderInfo->OrderType);
                 $openOrder->setOrderUuid($openOrderInfo->OrderUuid);
                 $openOrder->setPrice($openOrderInfo->Price);
-                $openOrder->setPricePerUnit($openOrderInfo->PricePerUnit);
                 $openOrder->setQuantity($openOrderInfo->Quantity);
                 $openOrder->setQuantityRemaining($openOrderInfo->QuantityRemaining);
-                $openOrder->setUuid($openOrderInfo->Uuid);
 
                 $openOrders[$openOrderInfo->OrderUuid] = $openOrder;
             }
