@@ -134,6 +134,14 @@ $bittrexClient->placeMarketOrder('buy', 'BTC-LTC', 50.0);
 $bittrexClient->placeMarketOrder('sell', 'BTC-LTC', 50.0);
 ```
 
+### Cancel order
+This method allows you to cancel an order (market and limit). It returns true if the order was successfully cancelled.
+
+```
+/** @return bool */
+$bittrexClient->cancelOrder('e606d53c-8d70-11e3-94b5-425861b86ab6');
+```
+
 ## Data models
 
 ### `new Balance()`

@@ -564,6 +564,28 @@ class Client
     }
 
     /**
+     * @param string $uuid
+     * @return bool
+     */
+    public function cancelOrder(string $uuid) : bool
+    {
+        $success = false;
+
+        try {
+            $response = $this->fetchAPIData('/market/cancel', ['uuid' => $uuid]);
+            $data = $this->parseAPIResponse($response);
+
+            $success = ($data->isSuccessful() && empty($data->getMessage()));
+        } catch (FetchException $exception) {
+            $this->handleException($exception);
+        } catch (GuzzleException $exception) {
+            $this->handleException($exception);
+        }
+
+        return $success;
+    }
+
+    /**
      * @param callable $exceptionHandler
      */
     public function setExceptionHandler(Callable $exceptionHandler)
