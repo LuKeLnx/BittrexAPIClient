@@ -6,6 +6,7 @@ use ErikBooij\Bittrex\Exception\FetchException;
 use ErikBooij\Bittrex\Model\APIResponse;
 use ErikBooij\Bittrex\Model\Balance;
 use ErikBooij\Bittrex\Model\Currency;
+use ErikBooij\Bittrex\Model\HistoricOrder;
 use ErikBooij\Bittrex\Model\Market;
 use ErikBooij\Bittrex\Model\MarketSummary;
 use ErikBooij\Bittrex\Model\OpenOrder;
@@ -445,6 +446,45 @@ class Client
         }
 
         return $orderBook;
+    }
+
+    /**
+     * @param int $count
+     * @return Order[]
+     */
+    public function getOrderHistory(int $count = 20)
+    {
+        $orderHistory = [];
+
+        try {
+            $response = $this->fetchAPIData('/account/getorderhistory', ['count' => $count]);
+            $data = $this->parseAPIResponse($response);
+
+            foreach ($data->getData() as $historicOrderInfo) {
+                $historicOrder = new HistoricOrder();
+
+                $historicOrder->setClosed(new \DateTime($historicOrderInfo->Closed));
+                $historicOrder->setCommission($historicOrderInfo->Commission);
+                $historicOrder->setCreated(new \DateTime($historicOrderInfo->TimeStamp));
+                $historicOrder->setImmediateOrCancel($historicOrderInfo->ImmediateOrCancel);
+                $historicOrder->setLimit($historicOrderInfo->Limit);
+                $historicOrder->setMarket($historicOrderInfo->Exchange);
+                $historicOrder->setPrice($historicOrderInfo->Price);
+                $historicOrder->setPricePerUnit($historicOrderInfo->PricePerUnit);
+                $historicOrder->setQuantity($historicOrderInfo->Quantity);
+                $historicOrder->setQuantityRemaining($historicOrderInfo->QuantityRemaining);
+                $historicOrder->setType($historicOrderInfo->OrderType);
+                $historicOrder->setUuid($historicOrderInfo->OrderUuid);
+
+                $orderHistory[] = $historicOrder;
+            }
+        } catch (FetchException $exception) {
+            $this->handleException($exception);
+        } catch (GuzzleException $exception) {
+            $this->handleException($exception);
+        }
+
+        return $orderHistory;
     }
 
     /**
